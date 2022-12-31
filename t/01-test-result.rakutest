@@ -1,0 +1,26 @@
+use v6;
+
+use Test;
+
+use Monad::Result;
+
+plan 9;
+
+my $result = Ok('Bob');
+
+ok $result.is-ok, 'Is result OK?';
+nok $result.is-error, 'Is result not Error?';
+is unwrap($result), 'Bob', 'Is unwrap correct?';
+
+my $binded_result = $result >>=? -> $prev { Ok('Tim') };
+
+ok $binded_result.is-ok, 'Is bind result OK?';
+nok $binded_result.is-error, 'Is bind result not Error?';
+is unwrap($binded_result), 'Tim', 'Is binded unwrap correct?';
+
+my $mapped_result = $result >>=: -> $val { "$val is my friend" };
+
+ok $mapped_result.is-ok, 'Is mapped result OK?';
+nok $mapped_result.is-error, 'Is mapped result not Error?';
+is unwrap($mapped_result), 'Tim is my friend', 'Is mapped result correct?';
+# vim: expandtab shiftwidth=4
