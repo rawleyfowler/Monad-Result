@@ -1,5 +1,7 @@
 # Monad-Result
 An implementation of the result monad from OCaml. This allows the developer to completely avoid exceptions.
+Note the result type is not generic, and cannot be statically typed. I think this makes it more flexible overall, 
+compared to OCaml's result monad. (Gradual typing ftw)!
 
 ## How to use
 ```raku
