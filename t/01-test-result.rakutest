@@ -1,26 +1,26 @@
 use v6;
 
-use Test;
+my ($ok, $plan) = do { use Test; (&ok, &plan) };
 
 use Monad::Result;
 
-plan 9;
+$plan(9);
 
-my $result = Ok('Bob');
+my $result = Monad::Result::ok('Bob');
 
-ok $result.is-ok, 'Is result OK?';
-nok $result.is-error, 'Is result not Error?';
-is unwrap($result), 'Bob', 'Is unwrap correct?';
+$ok($result.is-ok, 'Is result OK?');
+$ok(!$result.is-error, 'Is result not Error?');
+$ok(unwrap($result) eq 'Bob', 'Is unwrap correct?');
 
-my $binded_result = $result >>=? -> $prev { Ok('Tim') };
+my $binded_result = $result >>=: -> $prev { ok('Tim') };
 
-ok $binded_result.is-ok, 'Is bind result OK?';
-nok $binded_result.is-error, 'Is bind result not Error?';
-is unwrap($binded_result), 'Tim', 'Is binded unwrap correct?';
+$ok($binded_result.is-ok, 'Is bind result OK?');
+$ok(!$binded_result.is-error, 'Is bind result not Error?');
+$ok(unwrap($binded_result) eq 'Tim', 'Is binded unwrap correct?');
 
-my $mapped_result = $result >>=: -> $val { "$val is my friend" };
+my $mapped_result = ($result >>=? -> $val { "$val is my friend" });
 
-ok $mapped_result.is-ok, 'Is mapped result OK?';
-nok $mapped_result.is-error, 'Is mapped result not Error?';
-is unwrap($mapped_result), 'Tim is my friend', 'Is mapped result correct?';
+$ok($mapped_result.is-ok, 'Is mapped result OK?');
+$ok(!$mapped_result.is-error, 'Is mapped result not Error?');
+$ok(unwrap($mapped_result) eq 'Bob is my friend', 'Is mapped result correct?');
 # vim: expandtab shiftwidth=4

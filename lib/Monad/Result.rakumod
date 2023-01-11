@@ -58,19 +58,19 @@ role Result does Base {
 }
 
 # Returns
-our sub Ok($value --> Result) is export { Result.new(:$value) but Ok; }
-our sub Error($value --> Result) is export { Result.new(:$value) but Error; }
+our sub ok($value --> Result) is export { Result.new(:$value) but Ok; }
+our sub error($value --> Result) is export { Result.new(:$value) but Error; }
 
-# Bind : Result T -> (where f : T -> Result U) -> Result U
-sub infix:<\>\>=?>(Result $result, &f --> Result) is export {
+# Bind : Result T -> (f : T -> Result U) -> Result U
+sub infix:<\>\>=:>(Result $result, &f --> Result) is export {
     return $result if $result.is-error;
     &f($result.value);
 }
 
-# Map : Result T -> (where f : T -> U) -> Result U
-sub infix:<\>\>=:>(Result $result, &f --> Result) is export {
+# Map : Result T -> (f : T -> U) -> Result U
+sub infix:<\>\>=?>(Result $result, &f --> Result) is export {
     return $result if $result.is-error;
-    Ok(&f($result.value));
+    Monad::Result::ok(&f($result.value));
 }
 
 # Unsafe functions (these will kill your program)

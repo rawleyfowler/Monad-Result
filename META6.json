@@ -8,7 +8,7 @@
   "name": "Monad-Result",
   "perl": "6",
   "provides": {
-    "Monad::Result": "lib/Result.rakumod"
+    "Monad::Result": "lib/Monad/Result.rakumod"
   },
   "resources": [],
   "source-url": "https://github.com/rawleyfowler/Monad-Result.git",
