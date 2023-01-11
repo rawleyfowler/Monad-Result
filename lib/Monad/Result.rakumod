@@ -24,7 +24,11 @@ role Result does Base {
     has $.value is required;
 
     method value {
-        die "Tried to unwrap Ok of Error $!value" if self.is-error;
+        self.unwrap;
+    }
+
+    method unwrap {
+        die "Tried to unwrap Ok of Error ($!value)" if self.is-error;
         $!value;
     }
 
@@ -64,17 +68,17 @@ our sub error($value --> Result) is export { Result.new(:$value) but Error; }
 # Bind : Result T -> (f : T -> Result U) -> Result U
 sub infix:<\>\>=:>(Result $result, &f --> Result) is export {
     return $result if $result.is-error;
-    &f($result.value);
+    &f($result.unwrap);
 }
 
 # Map : Result T -> (f : T -> U) -> Result U
 sub infix:<\>\>=?>(Result $result, &f --> Result) is export {
     return $result if $result.is-error;
-    Monad::Result::ok(&f($result.value));
+    Monad::Result::ok(&f($result.unwrap));
 }
 
 # Unsafe functions (these will kill your program)
-sub unwrap(Result $result --> Any) is export { $result.value; }
+sub unwrap(Result $result --> Any) is export { $result.unwrap; }
 sub unwrap-error(Result $result --> Any) is export { $result.error; }
 
 # vim: expandtab shiftwidth=4

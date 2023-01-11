@@ -10,17 +10,17 @@ my $result = Monad::Result::ok('Bob');
 
 $ok($result.is-ok, 'Is result OK?');
 $ok(!$result.is-error, 'Is result not Error?');
-$ok(unwrap($result) eq 'Bob', 'Is unwrap correct?');
+$ok($result.unwrap eq 'Bob', 'Is unwrap correct?');
 
 my $binded_result = $result >>=: -> $prev { ok('Tim') };
 
 $ok($binded_result.is-ok, 'Is bind result OK?');
 $ok(!$binded_result.is-error, 'Is bind result not Error?');
-$ok(unwrap($binded_result) eq 'Tim', 'Is binded unwrap correct?');
+$ok($binded_result.unwrap eq 'Tim', 'Is binded unwrap correct?');
 
 my $mapped_result = ($result >>=? -> $val { "$val is my friend" });
 
 $ok($mapped_result.is-ok, 'Is mapped result OK?');
 $ok(!$mapped_result.is-error, 'Is mapped result not Error?');
-$ok(unwrap($mapped_result) eq 'Bob is my friend', 'Is mapped result correct?');
+$ok($mapped_result.unwrap eq 'Bob is my friend', 'Is mapped result correct?');
 # vim: expandtab shiftwidth=4
