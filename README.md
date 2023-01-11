@@ -36,3 +36,6 @@ say $result.unwrap; # 'abc HELLO WORLD';
 ```bash
 zef install Monad::Result
 ```
+
+## LICENSE
+Monad::Result is provided under the Artistic-2.0 license.
