@@ -39,7 +39,7 @@ say $result.unwrap; # 'abc HELLO WORLD';
 
 ## How to install
 ```bash
-zef install Monad::Result
+zef install Monad-Result
 ```
 
 ## LICENSE
