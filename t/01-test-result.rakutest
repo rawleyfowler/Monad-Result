@@ -6,7 +6,7 @@ use Monad::Result;
 
 $plan(9);
 
-my $result = Monad::Result::ok('Bob');
+my $result = ok('Bob');
 
 $ok($result.is-ok, 'Is result OK?');
 $ok(!$result.is-error, 'Is result not Error?');
