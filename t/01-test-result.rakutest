@@ -2,7 +2,7 @@ use v6;
 
 my ($ok, $plan) = do { use Test; (&ok, &plan) };
 
-use Monad::Result;
+use Monad::Result :subs;
 
 $plan(9);
 

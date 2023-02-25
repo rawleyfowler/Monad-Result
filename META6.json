@@ -22,9 +22,7 @@
     "Result"
   ],
   "test-depends": [
-    "Test",
-    "Test::When",
-    "Test::Notice"
+    "Test"
   ],
-  "version": "0.0.3"
+  "version": "1.0.0"
 }
