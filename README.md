@@ -12,7 +12,7 @@ use Monad::Result;
 
 sub my-error-causing-function($value --> Result) {
   return Monad::Result.error('Bad value!') if $value eq 'bad'
-  ok('Value was good!');
+  Monad::Result.ok('Value was good!');
 }
 
 # Bind operator: >>=:
