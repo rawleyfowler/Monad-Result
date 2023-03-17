@@ -28,7 +28,7 @@ method is-error {
 # Chainable bind and map for the Java hacker
 method bind(&f --> Monad::Result) {
 	return self if self.is-error;
-	&f(self);
+	&f($!value);
 }
 
 method map(&f --> Monad::Result) {
