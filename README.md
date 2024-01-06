@@ -11,7 +11,7 @@ compared to OCaml's result monad. (Gradual typing ftw)!
 use Monad::Result;
 
 sub my-error-causing-function($value --> Monad::Result) {
-  return Monad::Result.error('Bad value!') if $value eq 'bad'
+  return Monad::Result.error('Bad value!') if $value eq 'bad';
   Monad::Result.ok('Value was good!');
 }
 
@@ -45,7 +45,7 @@ Subs exist as a separate import, because they interfere with a lot of common pac
 use Monad::Result :subs;
 
 sub my-error-causing-function($value --> Monad::Result) {
-  return error('Bad value!') if $value eq 'bad'
+  return error('Bad value!') if $value eq 'bad';
   ok('Value was good!');
 }
 
